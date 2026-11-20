@@ -180,3 +180,163 @@
   window.addEventListener("resize", revealVisible);
   setTimeout(revealVisible, 400);
 })();
+
+// --- terminal --------------------------------------------------------------
+
+(() => {
+  const term = document.getElementById("terminal");
+  const output = document.getElementById("terminalOutput");
+  const form = document.getElementById("terminalForm");
+  const input = document.getElementById("terminalInput");
+  if (!term || !output || !form || !input) return;
+
+  const commands = {
+    help() {
+      return [
+        "available commands:",
+        "  whoami      who is this guy",
+        "  projects    featured builds",
+        "  interests   stuff i love",
+        "  skills      toolchain",
+        "  contact     how to reach me",
+        "  github      open my github profile",
+        "  theme       toggle green / amber phosphor",
+        "  reboot      restart the system",
+        "  clear       wipe the screen",
+      ];
+    },
+    whoami() {
+      return ["omer — 18 y/o pcb designer & hardware tinkerer"];
+    },
+    projects() {
+      return [
+        "featured builds:",
+        "  b2-stealth-fc   stm32 flight controller",
+        "  macropex        rp2040 macropad",
+        "  star-flight     rp2350 rocket computer",
+        "  venoshock       usb-c variable psu",
+        "  dk-32           batarang esp32 board",
+        "  apex-1          f1 line-following robot",
+        "  + 18 more on github",
+      ];
+    },
+    interests() {
+      return ["> pcb design", "> hardware", "> making leds blink"];
+    },
+    skills() {
+      return ["easyeda pro · kicad · stm32cube · qmk · arduino", "c · python · 3d printing · soldering"];
+    },
+    contact() {
+      return [
+        "github: github.com/omruk5689-dev",
+        "email:  best reached through github",
+        "open to: pcb design, firmware, weird hardware ideas",
+      ];
+    },
+    github() {
+      window.open("https://github.com/omruk5689-dev", "_blank", "noopener");
+      return ["opening github..."];
+    },
+    theme() {
+      const amber = document.body.classList.toggle("theme-amber");
+      document.body.classList.toggle("theme-green", !amber);
+      return [`phosphor set to ${amber ? "amber" : "green"}`];
+    },
+    reboot() {
+      if (typeof window.__omerBoot === "function") {
+        output.textContent = "";
+        window.__omerBoot();
+        return [];
+      }
+      return ["reboot unavailable"];
+    },
+    sudo() {
+      return ["nice try. this incident has been logged."];
+    },
+    matrix() {
+      return ["wake up, omer... follow the white pcb."];
+    },
+    date() {
+      return [new Date().toString()];
+    },
+    ls() {
+      return ["projects/  about/  contact/  README.md  solder.hex"];
+    },
+    clear() {
+      output.textContent = "";
+      return [];
+    },
+  };
+
+  const print = (text, variant) => {
+    const line = document.createElement("p");
+    line.className = "terminal__line" + (variant ? ` terminal__line--${variant}` : "");
+    line.textContent = text;
+    output.appendChild(line);
+  };
+
+  const scrollDown = () => {
+    output.scrollTop = output.scrollHeight;
+  };
+
+  const run = (raw) => {
+    const value = raw.trim();
+    if (!value) return;
+
+    print(`omer@lab:~$ ${value}`, "cmd");
+    const [name] = value.toLowerCase().split(/\s+/);
+    const handler = commands[name];
+
+    if (handler) {
+      const result = handler();
+      result.forEach((line) => print(line, "accent"));
+    } else {
+      print(`command not found: ${name}. type "help".`, "err");
+    }
+
+    scrollDown();
+  };
+
+  const history = [];
+  let cursor = -1;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const value = input.value;
+    if (value.trim()) {
+      history.push(value.trim());
+      cursor = history.length;
+    }
+    run(value);
+    input.value = "";
+  });
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      if (!history.length) return;
+      cursor = Math.max(0, cursor - 1);
+      input.value = history[cursor];
+    }
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      if (!history.length) return;
+      cursor = Math.min(history.length, cursor + 1);
+      input.value = history[cursor] || "";
+    }
+  });
+
+  term.addEventListener("click", (event) => {
+    if (event.target.closest("button")) return;
+    input.focus({ preventScroll: true });
+  });
+
+  document.querySelectorAll("[data-cmd]").forEach((button) => {
+    button.addEventListener("click", () => {
+      run(button.dataset.cmd);
+      input.focus({ preventScroll: true });
+    });
+  });
+
+  scrollDown();
+})();
