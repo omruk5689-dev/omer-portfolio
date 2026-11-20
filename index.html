@@ -109,9 +109,9 @@
 
   <main id="main" tabindex="-1">
     <section class="hero" id="home">
-      <div class="shell">
+      <div class="shell hero__grid">
         <div class="hero__copy">
-          <p class="hero__eyebrow reveal">[ PORTFOLIO v1.8 ] <span class="led led--live" aria-hidden="true"></span> SYSTEM ONLINE</p>
+          <p class="hero__eyebrow">[ PORTFOLIO v1.8 ] <span class="led led--live" aria-hidden="true"></span> SYSTEM ONLINE</p>
           <h1 class="hero__title" data-text="OMER">OMER</h1>
           <p class="hero__role"><span class="hero__role-cursor" aria-hidden="true">_</span> PCB DESIGNER / HARDWARE TINKERER</p>
           <p class="hero__lede">I'm Omer — 18 years old, and I spend my time designing circuit boards, writing firmware, and making hardware blink. Flight controllers, macropads, dev boards, rocket avionics. If it has traces, I'm in.</p>
@@ -125,9 +125,199 @@
             <div><dt>FEATURED BUILDS</dt><dd>10</dd></div>
           </dl>
         </div>
+
+        <div class="hero__art" aria-hidden="true">
+          <div class="hero__art-glow"></div>
+          <svg class="hero__svg" viewBox="0 0 680 560">
+            <defs>
+              <pattern id="svgScan" width="4" height="4" patternUnits="userSpaceOnUse">
+                <rect width="4" height="2" fill="#000" opacity=".22"/>
+              </pattern>
+              <pattern id="svgGrid" width="14" height="14" patternUnits="userSpaceOnUse">
+                <path d="M14 0H0V14" fill="none" stroke="#7dff9e" stroke-opacity=".06"/>
+              </pattern>
+              <radialGradient id="svgScreenGlow" cx="50%" cy="45%" r="65%">
+                <stop offset="0" stop-color="#7dff9e" stop-opacity=".12"/>
+                <stop offset="1" stop-color="#7dff9e" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="svgBezel" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e4d9bd"/>
+                <stop offset="1" stop-color="#c6b997"/>
+              </linearGradient>
+            </defs>
+
+            <g stroke="#1e3a26" stroke-width="1">
+              <path d="M40 62h10M45 57v10"/>
+              <path d="M630 150h10M635 145v10"/>
+              <path d="M64 380h8M68 376v8"/>
+              <path d="M610 70h8M614 66v8"/>
+            </g>
+            <g fill="#7dff9e" opacity=".55">
+              <rect x="82" y="128" width="3" height="3"/>
+              <rect x="620" y="214" width="3" height="3"/>
+              <rect x="54" y="304" width="2" height="2"/>
+              <rect x="646" y="342" width="2" height="2"/>
+            </g>
+
+            <rect x="20" y="510" width="640" height="3" fill="#1e3a26"/>
+            <rect x="20" y="513" width="640" height="2" fill="#0a120b"/>
+
+            <g transform="translate(26 492) rotate(-10)">
+              <rect x="0" y="0" width="92" height="12" rx="4" fill="#2d7a45" stroke="#0a0f0a" stroke-width="3"/>
+              <rect x="90" y="2" width="30" height="8" fill="#d8ccae" stroke="#0a0f0a" stroke-width="3"/>
+              <path d="M120 6h16" stroke="#7dff9e" stroke-width="4"/>
+              <circle cx="14" cy="6" r="3" fill="#ff6262" class="svg-led svg-led--2"/>
+            </g>
+
+            <ellipse cx="336" cy="454" rx="222" ry="12" fill="#000" opacity=".35"/>
+
+            <g class="svg-monitor">
+              <rect x="116" y="78" width="456" height="326" rx="20" fill="#000" opacity=".4"/>
+              <rect x="104" y="62" width="456" height="326" rx="20" fill="url(#svgBezel)" stroke="#0a0f0a" stroke-width="6"/>
+              <rect x="126" y="84" width="412" height="278" rx="12" fill="#1a2219" stroke="#0a0f0a" stroke-width="4"/>
+
+              <g fill="#a99d7e">
+                <rect x="140" y="72" width="22" height="3"/>
+                <rect x="140" y="78" width="22" height="3"/>
+                <rect x="168" y="72" width="22" height="3"/>
+                <rect x="168" y="78" width="22" height="3"/>
+              </g>
+
+              <g class="svg-screen">
+                <rect x="148" y="106" width="368" height="234" fill="#04120a" stroke="#4b6b51" stroke-width="2"/>
+                <rect x="148" y="106" width="368" height="234" fill="url(#svgGrid)"/>
+                <rect x="148" y="106" width="368" height="234" fill="url(#svgScreenGlow)"/>
+
+                <text x="164" y="128" class="svg-px" font-size="12" fill="#7dff9e">OMER.EXE</text>
+                <text x="500" y="128" text-anchor="end" class="svg-px" font-size="6" fill="#7fa98a">v1.8</text>
+                <path d="M162 136H502" stroke="#2d7a45" stroke-width="1"/>
+
+                <g>
+                  <rect x="162" y="146" width="194" height="148" fill="#0b2a16" stroke="#2d7a45" stroke-width="2"/>
+                  <g fill="none" stroke="#2d7a45" stroke-width="1.5">
+                    <path d="M174 162h30v18h24"/>
+                    <path d="M174 186h18v30h34"/>
+                    <path d="M342 158v24h-26v18"/>
+                    <path d="M342 230v28h-38"/>
+                    <path d="M174 264h38v18"/>
+                    <path d="M300 280h44v-24"/>
+                  </g>
+                  <g fill="#2d7a45">
+                    <circle cx="174" cy="162" r="2"/>
+                    <circle cx="228" cy="180" r="2"/>
+                    <circle cx="342" cy="182" r="2"/>
+                    <circle cx="316" cy="258" r="2"/>
+                    <circle cx="212" cy="282" r="2"/>
+                  </g>
+                  <rect x="220" y="184" width="60" height="54" fill="#14251a" stroke="#7dff9e" stroke-width="2"/>
+                  <g fill="#7dff9e">
+                    <rect x="230" y="179" width="3" height="5"/><rect x="238" y="179" width="3" height="5"/>
+                    <rect x="246" y="179" width="3" height="5"/><rect x="254" y="179" width="3" height="5"/>
+                    <rect x="262" y="179" width="3" height="5"/>
+                    <rect x="230" y="238" width="3" height="5"/><rect x="238" y="238" width="3" height="5"/>
+                    <rect x="246" y="238" width="3" height="5"/><rect x="254" y="238" width="3" height="5"/>
+                    <rect x="262" y="238" width="3" height="5"/>
+                  </g>
+                  <text x="250" y="216" text-anchor="middle" class="svg-px" font-size="5" fill="#7dff9e">RP2040</text>
+                  <rect x="166" y="270" width="26" height="18" fill="#b6a988" stroke="#0a0f0a" stroke-width="2"/>
+                  <rect x="330" y="270" width="18" height="12" fill="#16251a" stroke="#7fa98a"/>
+                  <text x="342" y="288" text-anchor="end" class="svg-px" font-size="5" fill="#7fa98a">PCB-18</text>
+                  <g>
+                    <circle cx="190" cy="248" r="3" fill="#7dff9e" class="svg-led"/>
+                    <circle cx="202" cy="248" r="3" fill="#ffb454" class="svg-led svg-led--2"/>
+                    <circle cx="214" cy="248" r="3" fill="#ff6262" class="svg-led svg-led--3"/>
+                  </g>
+                </g>
+
+                <g class="svg-px" font-size="7" fill="#7dff9e">
+                  <text x="374" y="170">&gt; PCB DESIGN</text>
+                  <text x="374" y="190">&gt; HARDWARE</text>
+                  <text x="374" y="210">&gt; FIRMWARE</text>
+                </g>
+                <rect x="374" y="226" width="70" height="18" fill="#7dff9e"/>
+                <text x="379" y="239" class="svg-px" font-size="6" fill="#04120a">[ READY ]</text>
+                <path class="svg-wave" d="M374 266h18l5-10 6 20 6-14 5 4h28" fill="none" stroke="#ffb454" stroke-width="2"/>
+                <text x="374" y="292" class="svg-term" font-size="12" fill="#7fa98a">640K RAM / NO BUGS*</text>
+
+                <text x="164" y="324" class="svg-term" font-size="12" fill="#7dff9e">C:\&gt; RUN OMER.EXE</text>
+                <rect x="286" y="314" width="6" height="12" fill="#7dff9e" class="svg-cursor"/>
+                <rect x="148" y="106" width="368" height="234" fill="url(#svgScan)"/>
+                <path d="M148 106 L310 106 L190 340 L148 340 Z" fill="#fff" opacity=".018"/>
+              </g>
+
+              <text x="132" y="378" class="svg-px" font-size="8" fill="#6f654b">OMER</text>
+              <text x="532" y="378" text-anchor="end" class="svg-px" font-size="6" fill="#6f654b">CRT-1984</text>
+              <circle cx="502" cy="375" r="3" fill="#7dff9e" class="svg-led svg-led--pwr"/>
+              <rect x="514" y="370" width="10" height="10" fill="#3a3324" stroke="#0a0f0a" stroke-width="2"/>
+            </g>
+
+            <path d="M296 388h72l16 42H280z" fill="#c6b997" stroke="#0a0f0a" stroke-width="5"/>
+            <rect x="248" y="430" width="168" height="16" rx="4" fill="url(#svgBezel)" stroke="#0a0f0a" stroke-width="5"/>
+
+            <g transform="translate(190 466)">
+              <rect width="232" height="40" rx="4" fill="#b6a988" stroke="#0a0f0a" stroke-width="4"/>
+              <g fill="#8f8467">
+                <rect x="10" y="8" width="14" height="6"/><rect x="27" y="8" width="14" height="6"/><rect x="44" y="8" width="14" height="6"/>
+                <rect x="61" y="8" width="14" height="6"/><rect x="78" y="8" width="14" height="6"/><rect x="95" y="8" width="14" height="6"/>
+                <rect x="112" y="8" width="14" height="6"/><rect x="129" y="8" width="14" height="6"/><rect x="146" y="8" width="14" height="6"/>
+                <rect x="163" y="8" width="14" height="6"/><rect x="180" y="8" width="14" height="6"/><rect x="197" y="8" width="14" height="6"/>
+                <rect x="10" y="18" width="14" height="6"/><rect x="27" y="18" width="14" height="6"/><rect x="44" y="18" width="14" height="6"/>
+                <rect x="61" y="18" width="14" height="6"/><rect x="78" y="18" width="14" height="6"/><rect x="95" y="18" width="14" height="6"/>
+                <rect x="112" y="18" width="14" height="6"/><rect x="129" y="18" width="14" height="6"/><rect x="146" y="18" width="14" height="6"/>
+                <rect x="163" y="18" width="14" height="6"/><rect x="180" y="18" width="14" height="6"/><rect x="197" y="18" width="14" height="6"/>
+                <rect x="10" y="28" width="14" height="6"/><rect x="27" y="28" width="14" height="6"/><rect x="44" y="28" width="14" height="6"/>
+                <rect x="61" y="28" width="14" height="6"/><rect x="78" y="28" width="14" height="6"/><rect x="95" y="28" width="14" height="6"/>
+                <rect x="112" y="28" width="62" height="6"/><rect x="180" y="28" width="14" height="6"/><rect x="197" y="28" width="14" height="6"/>
+              </g>
+              <path d="M232 4 C264 -8 296 -4 316 14" fill="none" stroke="#0a0f0a" stroke-width="3"/>
+            </g>
+
+            <g transform="translate(492 448) rotate(-7)">
+              <rect x="0" y="0" width="110" height="56" rx="3" fill="#0b2a16" stroke="#0a0f0a" stroke-width="3"/>
+              <g fill="none" stroke="#2d7a45" stroke-width="1.5">
+                <path d="M8 12h22v18h20"/>
+                <path d="M96 8v18H78v12"/>
+                <path d="M14 46h18V34"/>
+              </g>
+              <rect x="40" y="16" width="28" height="24" fill="#14251a" stroke="#7dff9e" stroke-width="2"/>
+              <text x="54" y="32" text-anchor="middle" class="svg-px" font-size="4" fill="#7dff9e">PIXO</text>
+              <rect x="8" y="38" width="16" height="10" fill="#b6a988" stroke="#0a0f0a" stroke-width="1"/>
+              <circle cx="94" cy="44" r="2" fill="#7dff9e" class="svg-led svg-led--2"/>
+            </g>
+
+            <g transform="translate(600 448)">
+              <g class="svg-steam" fill="#7fa98a">
+                <rect x="8" y="0" width="3" height="3"/>
+                <rect x="16" y="-8" width="3" height="3"/>
+                <rect x="24" y="-2" width="3" height="3"/>
+              </g>
+              <rect x="0" y="14" width="42" height="42" rx="3" fill="#d8ccae" stroke="#0a0f0a" stroke-width="4"/>
+              <path d="M42 24h10v18h-10" fill="none" stroke="#0a0f0a" stroke-width="4"/>
+              <rect x="6" y="22" width="30" height="4" fill="#2d7a45"/>
+            </g>
+
+            <g fill="#8f8467">
+              <circle cx="120" cy="78" r="2"/><circle cx="544" cy="78" r="2"/>
+              <circle cx="120" cy="372" r="2"/><circle cx="544" cy="372" r="2"/>
+            </g>
+          </svg>
+          <span class="hero__sticker">18 <span>Y/O</span></span>
+          <p class="hero__art-caption">FIG.01 — WORKSTATION / CRT-1984</p>
+        </div>
       </div>
-      <p class="hero__scroll" aria-hidden="true">SCROLL TO CONTINUE <span>v</span></p>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <div class="ticker__group">
+            <span>CUSTOM PCBs</span><span>STM32</span><span>RP2040</span><span>ESP32</span><span>QMK</span><span>EASYEDA</span><span>SOLDERING</span><span>3D PRINTING</span><span>RC PLANES</span><span>ROCKETS</span>
+          </div>
+          <div class="ticker__group">
+            <span>CUSTOM PCBs</span><span>STM32</span><span>RP2040</span><span>ESP32</span><span>QMK</span><span>EASYEDA</span><span>SOLDERING</span><span>3D PRINTING</span><span>RC PLANES</span><span>ROCKETS</span>
+          </div>
+        </div>
+      </div>
     </section>
+
   </main>
 </body>
 </html>
