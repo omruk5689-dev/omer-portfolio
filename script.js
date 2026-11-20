@@ -397,3 +397,108 @@
     }
   });
 })();
+
+// --- UI controls (clock, progress, nav, menu, phosphor) --------------------
+
+(() => {
+  const body = document.body;
+  const clock = document.getElementById("clock");
+  const scrollBar = document.getElementById("scrollBar");
+  const menuToggle = document.getElementById("menuToggle");
+  const siteNav = document.getElementById("siteNav");
+  const phosphorToggle = document.getElementById("phosphorToggle");
+
+  if (clock) {
+    const fmt = (value) => String(value).padStart(2, "0");
+    const tick = () => {
+      const now = new Date();
+      clock.textContent = `${fmt(now.getHours())}:${fmt(now.getMinutes())}:${fmt(now.getSeconds())}`;
+      clock.dateTime = now.toISOString();
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  if (scrollBar) {
+    const updateProgress = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const progress = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+      scrollBar.style.width = `${progress}%`;
+    };
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+  }
+
+  if (menuToggle && siteNav) {
+    const closeMenu = () => {
+      siteNav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const open = siteNav.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!siteNav.classList.contains("is-open")) return;
+      if (siteNav.contains(event.target) || menuToggle.contains(event.target)) return;
+      closeMenu();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  }
+
+  const navLinks = Array.from(document.querySelectorAll('.site-nav__link[href^="#"]'));
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  if (navLinks.length && sections.length && "IntersectionObserver" in window) {
+    const byId = new Map(navLinks.map((link) => [link.getAttribute("href").slice(1), link]));
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => link.classList.remove("is-active"));
+          const active = byId.get(entry.target.id);
+          if (active) active.classList.add("is-active");
+        });
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 }
+    );
+    sections.forEach((section) => navObserver.observe(section));
+  }
+
+  if (phosphorToggle) {
+    const syncPhosphor = () => {
+      const amber = body.classList.contains("theme-amber");
+      phosphorToggle.textContent = amber ? "PHOS:AMB" : "PHOS:GRN";
+      phosphorToggle.setAttribute("aria-pressed", String(amber));
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", amber ? "#130d05" : "#07130b");
+    };
+
+    phosphorToggle.addEventListener("click", () => {
+      const amber = body.classList.toggle("theme-amber");
+      body.classList.toggle("theme-green", !amber);
+      syncPhosphor();
+    });
+
+    syncPhosphor();
+  }
+})();
