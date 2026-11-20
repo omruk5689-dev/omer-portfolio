@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07130b">
+  <title>OMER.EXE — PCB Designer &amp; Hardware Tinkerer</title>
+  <meta name="description" content="Omer is an 18-year-old PCB designer and hardware tinkerer building flight controllers, macropads, dev boards, and rocket avionics.">
+  <link rel="preload" href="assets/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="theme-green">
+  <a class="skip-link" href="#main">SKIP TO CONTENT</a>
+
+  <div class="crt-frame" aria-hidden="true">
+    <span class="crt-frame__brand">OMER VISION 1984</span>
+    <span class="crt-frame__led"></span>
+  </div>
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="shell header__inner">
+      <a class="brand" href="#home" aria-label="OMER.EXE — home">
+        <svg class="brand__mark" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges">
+          <rect x="3" y="3" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1"/>
+          <rect x="5" y="5" width="6" height="6" fill="currentColor"/>
+          <rect x="6" y="0" width="1" height="2" fill="currentColor"/><rect x="9" y="0" width="1" height="2" fill="currentColor"/>
+          <rect x="6" y="14" width="1" height="2" fill="currentColor"/><rect x="9" y="14" width="1" height="2" fill="currentColor"/>
+          <rect x="0" y="6" width="2" height="1" fill="currentColor"/><rect x="0" y="9" width="2" height="1" fill="currentColor"/>
+          <rect x="14" y="6" width="2" height="1" fill="currentColor"/><rect x="14" y="9" width="2" height="1" fill="currentColor"/>
+        </svg>
+        <span class="brand__text">OMER<span>.EXE</span></span>
+        <span class="brand__cursor" aria-hidden="true"></span>
+      </a>
+
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <a class="site-nav__link" href="#home"><span>01</span>HOME</a>
+        <a class="site-nav__link" href="#projects"><span>02</span>PROJECTS</a>
+        <a class="site-nav__link" href="#about"><span>03</span>ABOUT</a>
+        <a class="site-nav__link" href="#contact"><span>04</span>CONTACT</a>
+      </nav>
+
+      <div class="header__tools">
+        <span class="sys-clock"><span class="sys-clock__label">SYS</span><time id="clock" datetime="">--:--:--</time></span>
+        <button class="chip-btn" id="soundToggle" type="button" aria-pressed="false" aria-label="Toggle interface sound">SND:OFF</button>
+        <button class="chip-btn" id="phosphorToggle" type="button" aria-pressed="false" aria-label="Switch phosphor colour">PHOS:GRN</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="home">
+      <div class="shell">
+        <div class="hero__copy">
+          <p class="hero__eyebrow reveal">[ PORTFOLIO v1.8 ] <span class="led led--live" aria-hidden="true"></span> SYSTEM ONLINE</p>
+          <h1 class="hero__title" data-text="OMER">OMER</h1>
+          <p class="hero__role"><span class="hero__role-cursor" aria-hidden="true">_</span> PCB DESIGNER / HARDWARE TINKERER</p>
+          <p class="hero__lede">I'm Omer — 18 years old, and I spend my time designing circuit boards, writing firmware, and making hardware blink. Flight controllers, macropads, dev boards, rocket avionics. If it has traces, I'm in.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#projects">VIEW PROJECTS <span aria-hidden="true">-&gt;</span></a>
+            <a class="btn" href="#about">ABOUT ME</a>
+          </div>
+          <dl class="hero__stats">
+            <div><dt>AGE</dt><dd>18</dd></div>
+            <div><dt>PUBLIC REPOS</dt><dd>24</dd></div>
+            <div><dt>FEATURED BUILDS</dt><dd>10</dd></div>
+          </dl>
+        </div>
+      </div>
+      <p class="hero__scroll" aria-hidden="true">SCROLL TO CONTINUE <span>v</span></p>
+    </section>
+  </main>
+</body>
+</html>
