@@ -10,9 +10,10 @@
   <link rel="preload" href="assets/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script>try{if(sessionStorage.getItem("omer-booted")==="1")document.documentElement.classList.add("boot-skip");}catch(e){}</script>
   <script src="script.js" defer></script>
 </head>
-<body class="theme-green">
+<body class="theme-green is-booting">
   <a class="skip-link" href="#main">SKIP TO CONTENT</a>
 
   <div class="crt-frame" aria-hidden="true">
@@ -20,6 +21,57 @@
     <span class="crt-frame__led"></span>
   </div>
   <div class="crt-overlay" aria-hidden="true"></div>
+
+  <div class="boot" id="boot" role="dialog" aria-modal="true" aria-label="Booting OMER.EXE">
+    <div class="boot__screen">
+      <div class="boot__top">
+        <span>OMER LAB BIOS v1.8</span>
+        <button class="boot__skip" id="bootSkip" type="button">[ SKIP ]</button>
+      </div>
+
+      <p class="sr-only">Booting the portfolio. Press any key, or activate skip, to enter the site.</p>
+
+      <div class="boot__log" aria-hidden="true">
+        <p data-boot-line>OMER LAB BIOS v1.8 — (C) 2026 OMER</p>
+        <p data-boot-line>CPU: HUMAN BRAIN @ 18 YEARS ........ OK</p>
+        <p data-boot-line>RAM: 640K .......................... OK</p>
+        <p data-boot-line>CRT: PHOSPHOR DISPLAY .............. OK</p>
+        <p data-boot-line>I/O: SOLDER IRON ................... READY</p>
+        <p data-boot-line>I/O: PCB FAB ....................... READY</p>
+        <p data-boot-line>SCANNING GITHUB REPOS .............. 24 FOUND</p>
+      </div>
+
+      <pre class="boot__ascii" aria-hidden="true">
+ ██████╗ ███╗   ███╗███████╗██████╗
+██╔═══██╗████╗ ████║██╔════╝██╔══██╗
+██║   ██║██╔████╔██║█████╗  ██████╔╝
+██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗
+╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║
+ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝</pre>
+      <p class="boot__tagline">PCB DESIGNER / HARDWARE TINKERER / 18 Y.O.</p>
+
+      <div class="boot__progress" aria-hidden="true">
+        <div class="boot__bar"><span id="bootBar"></span></div>
+        <span class="boot__pct" id="bootPct">0%</span>
+      </div>
+
+      <p class="boot__hint" id="bootHint">LOADING OMER.EXE<span class="boot__dots" aria-hidden="true">...</span></p>
+      <p class="boot__press" id="bootPress" hidden>PRESS ANY KEY TO ENTER</p>
+
+      <div class="boot__footer" aria-hidden="true">
+        <span>640K RAM OK</span>
+        <span>CRT-1984</span>
+        <span>NO BUGS*</span>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <style>
+      .boot { display: none; }
+      body.is-booting { overflow: auto; }
+    </style>
+  </noscript>
 
   <header class="site-header">
     <div class="shell header__inner">

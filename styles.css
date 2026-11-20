@@ -95,8 +95,13 @@ body {
   overflow-x: hidden;
 }
 
-body.menu-open {
+body.menu-open,
+body.is-booting {
   overflow: hidden;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 ::selection {
@@ -177,11 +182,13 @@ svg {
   color: var(--bg);
   font-family: var(--font-pixel);
   font-size: 8px;
+  opacity: 0;
   transform: translateY(-160%);
-  transition: transform var(--step) steps(3);
+  transition: transform var(--step) steps(3), opacity var(--step) steps(3);
 }
 
 .skip-link:focus {
+  opacity: 1;
   transform: none;
 }
 
@@ -258,6 +265,221 @@ svg {
     radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.42) 100%),
     linear-gradient(90deg, rgba(255, 0, 80, 0.015), transparent 20%, transparent 80%, rgba(0, 120, 255, 0.015));
   animation: crt-flicker 9s steps(1) infinite;
+}
+
+/* --- boot sequence ------------------------------------------------------- */
+
+.boot {
+  position: fixed;
+  inset: var(--frame);
+  z-index: 100;
+  display: flex;
+  padding: clamp(20px, 4vw, 56px);
+  overflow-y: auto;
+  background: #020604;
+  color: var(--green);
+}
+
+.boot::before {
+  content: "";
+  position: fixed;
+  inset: var(--frame);
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 2px,
+    rgba(0, 0, 0, 0.22) 4px
+  );
+}
+
+.boot::after {
+  content: "";
+  position: fixed;
+  inset: var(--frame);
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 48%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.boot__screen {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 100%);
+  margin: auto;
+  font-family: var(--font-term);
+  font-size: clamp(17px, 2vw, 23px);
+  line-height: 1.3;
+  text-shadow: 0 0 10px rgba(125, 255, 158, 0.3);
+}
+
+.boot__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line);
+  color: var(--muted);
+  font-family: var(--font-pixel);
+  font-size: clamp(6px, 0.8vw, 9px);
+  letter-spacing: 0.04em;
+}
+
+.boot__skip {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--green);
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  transition: background var(--step) steps(2), color var(--step) steps(2);
+}
+
+.boot__skip:hover {
+  background: var(--green);
+  color: var(--bg);
+}
+
+.boot__log {
+  min-height: calc(1.3em * 7 + 10px);
+  margin-top: clamp(14px, 3vh, 26px);
+}
+
+.boot__log p {
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.12s steps(2), transform 0.12s steps(2);
+}
+
+.boot__log p.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.boot__ascii {
+  margin: clamp(14px, 3vh, 28px) 0 8px;
+  overflow: hidden;
+  color: var(--green);
+  font-family: var(--font-term), monospace;
+  font-size: clamp(7px, 1.15vw, 11px);
+  line-height: 1.05;
+  text-align: center;
+  white-space: pre;
+  text-shadow: 0 0 12px rgba(125, 255, 158, 0.5);
+}
+
+.boot__tagline {
+  color: var(--muted);
+  font-family: var(--font-pixel);
+  font-size: clamp(6px, 0.8vw, 8px);
+  letter-spacing: 0.16em;
+  text-align: center;
+}
+
+.boot__progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(16px, 3vh, 28px);
+}
+
+.boot__bar {
+  flex: 1;
+  height: 20px;
+  padding: 3px;
+  border: 2px solid var(--green-dim);
+}
+
+.boot__bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--green) 0 6px, transparent 6px 9px);
+  box-shadow: 0 0 12px rgba(125, 255, 158, 0.3);
+  transition: width 0.1s steps(3);
+}
+
+.boot__pct {
+  width: 48px;
+  color: var(--green);
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  text-align: right;
+}
+
+.boot__hint,
+.boot__press {
+  min-height: 1.7em;
+  margin-top: 16px;
+  font-family: var(--font-pixel);
+  font-size: clamp(6px, 0.8vw, 9px);
+  letter-spacing: 0.06em;
+}
+
+.boot__hint {
+  color: var(--muted);
+}
+
+.boot__dots {
+  display: inline-block;
+  width: 1.5em;
+  overflow: hidden;
+  vertical-align: bottom;
+  animation: boot-dots 1.2s steps(4) infinite;
+}
+
+.boot__press {
+  color: var(--green-hot);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+.boot__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: clamp(20px, 4vh, 34px);
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  letter-spacing: 0.06em;
+}
+
+.boot.is-off {
+  animation: crt-off 0.55s steps(6) forwards;
+}
+
+html.boot-skip .boot {
+  display: none;
+}
+
+html.boot-skip body {
+  overflow: auto;
+}
+
+@keyframes boot-dots {
+  0% { width: 0; }
+  100% { width: 1.5em; }
+}
+
+@keyframes crt-off {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  55% {
+    transform: scale(1, 0.01);
+    filter: brightness(3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.25, 0.004);
+    filter: brightness(8);
+    opacity: 0;
+  }
 }
 
 /* --- header -------------------------------------------------------------- */
