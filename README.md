@@ -1,11 +1,13 @@
 # OMER.EXE
 
-Retro desktop portfolio for **Omer** (18 y/o) — PCB designer and hardware tinkerer.
+Minecraft-themed retro portfolio for **Omer** (18 y/o) — PCB designer and hardware tinkerer.
 
-- Detailed retro **Apple-style desktop** look: platinum/grey bezel, beveled window chrome, desktop menubar feel, and realistic depth/shadows
-- **Grey + purple** palette with **red neon** accents (Netflix-inspired neon red) and a red/purple neon toggle
+- **Minecraft-inspired UI**: blocky stone/dirt/grass panels, sky-overworld background, pixel UI, and chunky retro styling
+- **Animations everywhere**: floating clouds/blocks/particles, bobbing/swinging tools, character animations (Steve & Creeper), reveal transitions, hover effects, parallax, and animated stats
+- Minecraft characters & tools featured across the site (pickaxe, sword, axe, blocks, creeper)
+- Day/Night mode toggle (Overworld / Amethyst night)
 - Pixel/retro fonts: self-hosted **Press Start 2P** + **VT323**
-- CRT scanlines/glow, BIOS boot/loading sequence
+- BIOS-style boot/loading sequence
 - Projects pulled from real GitHub repos: flight controllers, macropads, dev boards, rocket avionics, and more
 
 ## Live site
