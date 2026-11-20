@@ -200,7 +200,7 @@
         "  skills      toolchain",
         "  contact     how to reach me",
         "  github      open my github profile",
-        "  theme       toggle green / amber phosphor",
+        "  theme       toggle red / purple neon",
         "  reboot      restart the system",
         "  clear       wipe the screen",
       ];
@@ -238,9 +238,9 @@
       return ["opening github..."];
     },
     theme() {
-      const amber = document.body.classList.toggle("theme-amber");
-      document.body.classList.toggle("theme-green", !amber);
-      return [`phosphor set to ${amber ? "amber" : "green"}`];
+      const purple = document.body.classList.toggle("theme-purple");
+      document.body.classList.toggle("theme-red", !purple);
+      return [`neon set to ${purple ? "purple" : "red"}`];
     },
     reboot() {
       if (typeof window.__omerBoot === "function") {
@@ -486,16 +486,17 @@
 
   if (phosphorToggle) {
     const syncPhosphor = () => {
-      const amber = body.classList.contains("theme-amber");
-      phosphorToggle.textContent = amber ? "PHOS:AMB" : "PHOS:GRN";
-      phosphorToggle.setAttribute("aria-pressed", String(amber));
+      const purple = body.classList.contains("theme-purple");
+      phosphorToggle.textContent = purple ? "NEON:PUR" : "NEON:RED";
+      phosphorToggle.setAttribute("aria-pressed", String(purple));
+      phosphorToggle.setAttribute("aria-label", purple ? "Switch to red neon" : "Switch to purple neon");
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", amber ? "#130d05" : "#07130b");
+      if (meta) meta.setAttribute("content", purple ? "#151225" : "#14111f");
     };
 
     phosphorToggle.addEventListener("click", () => {
-      const amber = body.classList.toggle("theme-amber");
-      body.classList.toggle("theme-green", !amber);
+      const purple = body.classList.toggle("theme-purple");
+      body.classList.toggle("theme-red", !purple);
       syncPhosphor();
     });
 
