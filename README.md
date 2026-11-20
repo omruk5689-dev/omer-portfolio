@@ -11,6 +11,25 @@ Retro CRT portfolio for **Omer** (18 y/o) — PCB designer and hardware tinkerer
 
 Planned: `https://omruk5689-dev.github.io/omer-portfolio/`
 
+## Deploy (GitHub Pages)
+
+1. Create a public repo named `omer-portfolio` under `omruk5689-dev`.
+2. Add it as remote and push `main`:
+   ```bash
+   git remote add origin https://github.com/omruk5689-dev/omer-portfolio.git
+   git push -u origin main
+   ```
+3. In **Settings → Pages**, set Source to **Deploy from a branch**, branch `main`, folder `/ (root)`.
+
+## Connect to GitHub profile
+
+Add a link to the live site in your profile README repo (`omruk5689-dev/omruk5689-dev`), for example:
+
+```md
+## OMER.EXE
+**[omruk5689-dev.github.io/omer-portfolio](https://omruk5689-dev.github.io/omer-portfolio/)** — retro CRT portfolio. I'm Omer (18) and I love PCB design and hardware.
+```
+
 ## Local preview
 
 Static site (no build step). Serve the folder locally:
