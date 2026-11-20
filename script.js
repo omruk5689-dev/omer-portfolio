@@ -163,6 +163,11 @@
     { threshold: 0.01, rootMargin: "0px 0px -40px 0px" }
   );
 
+  // add stagger delays to direct reveal children like cards/stats where useful
+  document.querySelectorAll(".project-card, .hero__stats > div, .mc-tool, .mc-char, .contact__card, .love-list li, .toolchain li").forEach((el, i) => {
+    el.style.setProperty("--stagger", `${(i % 6) * 70}ms`);
+  });
+
   const revealVisible = () => {
     const viewport = window.innerHeight;
     items.forEach((item) => {
@@ -200,8 +205,10 @@
         "  skills      toolchain",
         "  contact     how to reach me",
         "  github      open my github profile",
-        "  theme       toggle red / purple neon",
+        "  theme       toggle day / night world",
         "  reboot      restart the system",
+        "  minecraft   mine some blocks",
+        "  creeper     ???",
         "  clear       wipe the screen",
       ];
     },
@@ -238,9 +245,9 @@
       return ["opening github..."];
     },
     theme() {
-      const purple = document.body.classList.toggle("theme-purple");
-      document.body.classList.toggle("theme-red", !purple);
-      return [`neon set to ${purple ? "purple" : "red"}`];
+      const night = document.body.classList.toggle("theme-purple");
+      document.body.classList.toggle("theme-green-mc", !night);
+      return [`world set to ${night ? "amethyst night" : "overworld day"}`];
     },
     reboot() {
       if (typeof window.__omerBoot === "function") {
@@ -265,6 +272,12 @@
     clear() {
       output.textContent = "";
       return [];
+    },
+    minecraft() {
+      return ["⛏️ mining blocks...", "💎 found: PCBs, solder, ideas", "🧟 creeper? no, just a bug. fixed."];
+    },
+    creeper() {
+      return ["ssssSss... BOOM! just kidding."];
     },
   };
 
@@ -486,20 +499,105 @@
 
   if (phosphorToggle) {
     const syncPhosphor = () => {
-      const purple = body.classList.contains("theme-purple");
-      phosphorToggle.textContent = purple ? "NEON:PUR" : "NEON:RED";
-      phosphorToggle.setAttribute("aria-pressed", String(purple));
-      phosphorToggle.setAttribute("aria-label", purple ? "Switch to red neon" : "Switch to purple neon");
+      const night = body.classList.contains("theme-purple");
+      phosphorToggle.textContent = night ? "MODE:NIGHT" : "MODE:DAY";
+      phosphorToggle.setAttribute("aria-pressed", String(night));
+      phosphorToggle.setAttribute("aria-label", night ? "Switch to day mode" : "Switch to night mode");
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", purple ? "#151225" : "#14111f");
+      if (meta) meta.setAttribute("content", night ? "#14233a" : "#78b9ff");
     };
 
     phosphorToggle.addEventListener("click", () => {
-      const purple = body.classList.toggle("theme-purple");
-      body.classList.toggle("theme-red", !purple);
+      const night = body.classList.toggle("theme-purple");
+      body.classList.toggle("theme-green-mc", !night);
       syncPhosphor();
     });
 
     syncPhosphor();
+  }
+})();
+
+
+// --- minecraft atmosphere (particles, parallax, counters) ------------------
+
+(() => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // floating particles
+  if (!reduced) {
+    const layer = document.createElement("div");
+    layer.className = "mc-particles";
+    layer.setAttribute("aria-hidden", "true");
+    document.body.appendChild(layer);
+    const colors = ["#55c233", "#8ef06a", "#4deeea", "#f7c948", "#ffffff"];
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement("span");
+      p.className = "mc-particle";
+      const size = 4 + Math.floor(Math.random() * 4) * 2;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.left = `${Math.random() * 100}%`;
+      p.style.bottom = `${-10 - Math.random() * 30}px`;
+      p.style.background = colors[i % colors.length];
+      p.style.animationDuration = `${10 + Math.random() * 14}s`;
+      p.style.animationDelay = `${Math.random() * 12}s`;
+      p.style.opacity = String(0.25 + Math.random() * 0.35);
+      layer.appendChild(p);
+    }
+  }
+
+  // gentle parallax for hero art and clouds
+  if (!reduced) {
+    const art = document.querySelector(".hero__art");
+    const clouds = document.querySelectorAll(".mc-cloud");
+    let raf = null;
+    const onMove = (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const x = (e.clientX / window.innerWidth - 0.5);
+        const y = (e.clientY / window.innerHeight - 0.5);
+        if (art) art.style.transform = `translate(${x * -10}px, ${y * -8}px)`;
+        clouds.forEach((c, i) => {
+          c.style.transform = `translate(${x * (8 + i * 6)}px, ${y * (4 + i * 3)}px)`;
+        });
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+  }
+
+  // animate stat numbers once visible
+  const stats = Array.from(document.querySelectorAll(".hero__stats dd"));
+  if (stats.length && "IntersectionObserver" in window) {
+    const animate = (el) => {
+      const raw = el.textContent.trim();
+      const match = raw.match(/^(\d+)/);
+      if (!match) return;
+      const target = parseInt(match[1], 10);
+      const suffix = raw.slice(match[1].length);
+      const start = performance.now();
+      const dur = reduced ? 0 : 900;
+      const step = (now) => {
+        const t = dur ? Math.min(1, (now - start) / dur) : 1;
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = `${Math.round(target * eased)}${suffix}`;
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animate(entry.target);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+    stats.forEach((s) => io.observe(s));
+  }
+
+  // fun terminal commands
+  const term = document.getElementById("terminalOutput");
+  if (term) {
+    // hook into existing command system by listening to form submissions? easier to extend via global if needed
   }
 })();
