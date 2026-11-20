@@ -340,3 +340,60 @@
 
   scrollDown();
 })();
+
+// --- project filters -------------------------------------------------------
+
+(() => {
+  const buttons = Array.from(document.querySelectorAll(".filter[data-filter]"));
+  const cards = Array.from(document.querySelectorAll(".project-card[data-category]"));
+  const counter = document.getElementById("projectCount");
+  if (!buttons.length || !cards.length) return;
+
+  const total = cards.length;
+
+  const applyFilter = (filter) => {
+    let shown = 0;
+
+    cards.forEach((card) => {
+      const match = filter === "all" || card.dataset.category === filter;
+      card.hidden = !match;
+      card.classList.remove("is-entering");
+      if (match) {
+        shown += 1;
+        // force reflow so the entry animation restarts on each filter change
+        void card.offsetWidth;
+        card.classList.add("is-entering");
+      }
+    });
+
+    buttons.forEach((button) => {
+      const active = button.dataset.filter === filter;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    if (counter) {
+      counter.textContent = `SHOWING ${String(shown).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+    }
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => applyFilter(button.dataset.filter));
+  });
+
+  applyFilter("all");
+})();
+
+// --- reboot button ---------------------------------------------------------
+
+(() => {
+  const btn = document.getElementById("rebootBtn");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    if (typeof window.__omerBoot === "function") {
+      window.__omerBoot();
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  });
+})();
