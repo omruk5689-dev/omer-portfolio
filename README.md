@@ -1,10 +1,11 @@
 # OMER.EXE
 
-Retro CRT portfolio for **Omer** (18 y/o) — PCB designer and hardware tinkerer.
+Retro desktop portfolio for **Omer** (18 y/o) — PCB designer and hardware tinkerer.
 
-- Pixel/retro theme with Press Start 2P + VT323 fonts
-- CRT monitor frame, scanlines, BIOS boot/loading sequence
-- Green/amber phosphor toggle
+- Detailed retro **Apple-style desktop** look: platinum/grey bezel, beveled window chrome, desktop menubar feel, and realistic depth/shadows
+- **Grey + purple** palette with **red neon** accents (Netflix-inspired neon red) and a red/purple neon toggle
+- Pixel/retro fonts: self-hosted **Press Start 2P** + **VT323**
+- CRT scanlines/glow, BIOS boot/loading sequence
 - Projects pulled from real GitHub repos: flight controllers, macropads, dev boards, rocket avionics, and more
 
 ## Live site
