@@ -139,3 +139,44 @@
 
   startBoot();
 })();
+
+// --- reveal on scroll ------------------------------------------------------
+
+(() => {
+  const items = Array.from(document.querySelectorAll(".reveal"));
+  if (!items.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.01, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  const revealVisible = () => {
+    const viewport = window.innerHeight;
+    items.forEach((item) => {
+      if (item.classList.contains("is-visible")) return;
+      const rect = item.getBoundingClientRect();
+      if (rect.top < viewport - 40 && rect.bottom > 0) {
+        item.classList.add("is-visible");
+        observer.unobserve(item);
+      }
+    });
+  };
+
+  items.forEach((item) => observer.observe(item));
+  window.addEventListener("load", revealVisible);
+  window.addEventListener("resize", revealVisible);
+  setTimeout(revealVisible, 400);
+})();
