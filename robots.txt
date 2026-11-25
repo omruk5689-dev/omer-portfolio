@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://omruk5689-dev.github.io/omer-portfolio/sitemap.xml
