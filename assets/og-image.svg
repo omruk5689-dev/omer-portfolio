@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8fd3ff"/><stop offset="62%" stop-color="#78b9ff"/>
+      <stop offset="62%" stop-color="#355f2d"/><stop offset="68%" stop-color="#355f2d"/>
+      <stop offset="68%" stop-color="#5b4636"/><stop offset="100%" stop-color="#4e3423"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <rect x="60" y="60" width="1080" height="510" fill="none" stroke="#3d2b1f" stroke-width="12"/>
+  <rect x="72" y="72" width="1056" height="486" fill="rgba(43,32,24,0.72)"/>
+  <text x="100" y="170" fill="#55c233" font-size="88" font-family="monospace" font-weight="700">OMER.EXE</text>
+  <text x="100" y="235" fill="#fff7d6" font-size="34" font-family="monospace">PCB DESIGNER / HARDWARE TINKERER / AGE 18</text>
+  <text x="100" y="305" fill="#d8c49a" font-size="30" font-family="monospace">Flight controllers • Macropads • Dev boards • Rocket avionics</text>
+  <g fill="#55c233">
+    <rect x="100" y="390" width="28" height="28"/><rect x="136" y="390" width="28" height="28"/><rect x="172" y="390" width="28" height="28"/>
+    <rect x="100" y="426" width="28" height="28"/><rect x="172" y="426" width="28" height="28"/>
+    <rect x="100" y="462" width="28" height="28"/><rect x="136" y="462" width="28" height="28"/><rect x="172" y="462" width="28" height="28"/>
+  </g>
+  <text x="230" y="448" fill="#8ef06a" font-size="28" font-family="monospace">github.com/omruk5689-dev</text>
+  <text x="100" y="540" fill="#f7c948" font-size="24" font-family="monospace">Minecraft-themed retro portfolio • No build step • Static HTML/CSS/JS</text>
+</svg>
