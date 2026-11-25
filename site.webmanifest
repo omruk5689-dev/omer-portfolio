@@ -1,0 +1,18 @@
+{
+  "name": "OMER.EXE — PCB Designer & Hardware Tinkerer",
+  "short_name": "OMER.EXE",
+  "description": "Minecraft-themed retro portfolio for Omer, an 18-year-old PCB designer and hardware tinkerer.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#78b9ff",
+  "theme_color": "#78b9ff",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
