@@ -18,7 +18,10 @@ Minecraft-themed retro portfolio for **Omer** (18 y/o) — PCB designer and hard
 
 ## Live site
 
-Planned: `https://omruk5689-dev.github.io/omer-portfolio/`
+**[omruk5689-dev.github.io/omer-portfolio](https://omruk5689-dev.github.io/omer-portfolio/)**
+
+- Repo: [github.com/omruk5689-dev/omer-portfolio](https://github.com/omruk5689-dev/omer-portfolio)
+- Profile: [github.com/omruk5689-dev](https://github.com/omruk5689-dev)
 
 ## Deploy (GitHub Pages)
 
