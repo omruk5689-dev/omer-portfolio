@@ -3,23 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#14111f">
+  <meta name="theme-color" content="#78b9ff">
   <title>OMER.EXE — PCB Designer &amp; Hardware Tinkerer</title>
   <meta name="description" content="Omer is an 18-year-old PCB designer and hardware tinkerer building flight controllers, macropads, dev boards, and rocket avionics.">
   <meta property="og:title" content="OMER.EXE — PCB Designer &amp; Hardware Tinkerer">
-  <meta property="og:description" content="Retro CRT portfolio of Omer, 18 — I love PCB design and hardware. Flight controllers, macropads, dev boards, and more.">
+  <meta property="og:description" content="Minecraft-themed retro portfolio of Omer, 18 — I love PCB design and hardware. Flight controllers, macropads, dev boards, and more.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://omruk5689-dev.github.io/omer-portfolio/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="OMER.EXE — PCB Designer &amp; Hardware Tinkerer">
-  <meta name="twitter:description" content="Retro CRT portfolio of Omer, 18 — I love PCB design and hardware.">
+  <meta name="twitter:description" content="Minecraft-themed retro portfolio of Omer, 18 — I love PCB design and hardware.">
   <link rel="preload" href="assets/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="minecraft.css">
+  <link rel="stylesheet" href="enhance.css">
   <script>try{if(sessionStorage.getItem("omer-booted")==="1")document.documentElement.classList.add("boot-skip");}catch(e){}</script>
   <script src="script.js" defer></script>
+  <script src="enhance.js" defer></script>
 </head>
 <body class="theme-green-mc is-booting">
   <a class="skip-link" href="#main">SKIP TO CONTENT</a>
@@ -138,6 +140,24 @@
       <rect x="5" y="11" width="2" height="3"/>
       <rect x="9" y="11" width="2" height="3"/>
     </symbol>
+    <symbol id="i-heart" viewBox="0 0 9 9">
+      <rect x="1" y="0" width="2" height="1"/><rect x="6" y="0" width="2" height="1"/>
+      <rect x="0" y="1" width="4" height="1"/><rect x="5" y="1" width="4" height="1"/>
+      <rect x="0" y="2" width="9" height="2"/>
+      <rect x="1" y="4" width="7" height="1"/>
+      <rect x="2" y="5" width="5" height="1"/>
+      <rect x="3" y="6" width="3" height="1"/>
+      <rect x="4" y="7" width="1" height="1"/>
+    </symbol>
+    <symbol id="i-hunger" viewBox="0 0 9 9">
+      <rect x="5" y="0" width="3" height="1"/>
+      <rect x="4" y="1" width="5" height="2"/>
+      <rect x="4" y="3" width="4" height="1"/>
+      <rect x="3" y="4" width="3" height="1"/>
+      <rect x="2" y="5" width="3" height="1"/>
+      <rect x="1" y="6" width="3" height="2"/>
+      <rect x="0" y="7" width="2" height="2"/>
+    </symbol>
   </svg>
 
   <div class="boot" id="boot" role="dialog" aria-modal="true" aria-label="Booting OMER.EXE">
@@ -157,6 +177,8 @@
         <p data-boot-line>I/O: SOLDER IRON ................... READY</p>
         <p data-boot-line>I/O: PCB FAB ....................... READY</p>
         <p data-boot-line>SCANNING GITHUB REPOS .............. 24 FOUND</p>
+        <p data-boot-line>HUD: HEARTS / HUNGER / HOTBAR ....... READY</p>
+        <p data-boot-line>SOUND: WEB AUDIO ENGINE ............ READY</p>
       </div>
 
       <pre class="boot__ascii" aria-hidden="true">
@@ -188,6 +210,7 @@
     <style>
       .boot { display: none; }
       body.is-booting { overflow: auto; }
+      .reveal { opacity: 1; transform: none; }
     </style>
   </noscript>
 
@@ -210,7 +233,8 @@
         <a class="site-nav__link" href="#home"><span>01</span>HOME</a>
         <a class="site-nav__link" href="#projects"><span>02</span>PROJECTS</a>
         <a class="site-nav__link" href="#about"><span>03</span>ABOUT</a>
-        <a class="site-nav__link" href="#contact"><span>04</span>CONTACT</a>
+        <a class="site-nav__link" href="#craft"><span>04</span>CRAFT</a>
+        <a class="site-nav__link" href="#contact"><span>05</span>CONTACT</a>
       </nav>
 
       <div class="header__tools">
@@ -226,6 +250,11 @@
   </header>
 
   <div class="mc-bg" aria-hidden="true">
+    <div class="mc-sky">
+      <span class="mc-sun"></span>
+      <span class="mc-moon"></span>
+      <div class="mc-stars" id="mcStars"></div>
+    </div>
     <div class="mc-cloud mc-cloud--1"></div>
     <div class="mc-cloud mc-cloud--2"></div>
     <div class="mc-cloud mc-cloud--3"></div>
@@ -235,6 +264,35 @@
     <span class="mc-float mc-float--diamond mc-float--4"></span>
     <span class="mc-float mc-float--diamond mc-float--5"></span>
     <span class="mc-float mc-float--xp mc-float--6"></span>
+
+    <div class="mc-mobs">
+      <div class="mc-mob mc-mob--zombie">
+        <svg viewBox="0 0 16 24" shape-rendering="crispEdges">
+          <rect x="3" y="0" width="10" height="8" fill="#5a9e4b"/>
+          <rect x="4" y="3" width="2" height="2" fill="#172316"/><rect x="10" y="3" width="2" height="2" fill="#172316"/>
+          <rect x="6" y="6" width="4" height="1" fill="#2f4a27"/>
+          <rect x="3" y="8" width="10" height="8" fill="#3f7f8a"/>
+          <rect x="0" y="8" width="3" height="8" fill="#5a9e4b"/>
+          <rect x="13" y="8" width="3" height="8" fill="#5a9e4b"/>
+          <rect x="4" y="16" width="3" height="8" fill="#2f4a7a"/>
+          <rect x="9" y="16" width="3" height="8" fill="#2f4a7a"/>
+        </svg>
+      </div>
+      <div class="mc-mob mc-mob--skeleton">
+        <svg viewBox="0 0 16 24" shape-rendering="crispEdges">
+          <rect x="3" y="0" width="10" height="8" fill="#d8d8d0"/>
+          <rect x="4" y="3" width="2" height="2" fill="#2a2a2a"/><rect x="10" y="3" width="2" height="2" fill="#2a2a2a"/>
+          <rect x="6" y="6" width="4" height="1" fill="#9a9a90"/>
+          <rect x="7" y="8" width="2" height="8" fill="#c8c8c0"/>
+          <rect x="4" y="10" width="8" height="1" fill="#c8c8c0"/>
+          <rect x="4" y="13" width="8" height="1" fill="#c8c8c0"/>
+          <rect x="1" y="9" width="2" height="7" fill="#d8d8d0"/>
+          <rect x="13" y="9" width="2" height="7" fill="#d8d8d0"/>
+          <rect x="4" y="16" width="2" height="8" fill="#d8d8d0"/>
+          <rect x="10" y="16" width="2" height="8" fill="#d8d8d0"/>
+        </svg>
+      </div>
+    </div>
   </div>
 
   <main id="main" tabindex="-1">
@@ -787,10 +845,56 @@
       </div>
     </section>
 
+    <section class="section craft" id="craft">
+      <div class="shell">
+        <div class="section-head reveal mc-section-head">
+          <p class="section-kicker">04 // CRAFTING</p>
+          <h2 class="section-title">&gt; CRAFTING.SYS</h2>
+          <p class="section-lede">Every board starts as a grid of parts. Pick a recipe and see what I turn raw components into.</p>
+          <div class="mc-head-tools" aria-hidden="true"><span class="mc-mini-tool">🧱</span><span class="mc-mini-tool">🔨</span><span class="mc-mini-tool">⚙️</span><span class="mc-mini-tool">💎</span></div>
+        </div>
+
+        <div class="craft__layout reveal">
+          <div class="craft__table">
+            <div class="craft__table-top">
+              <span class="craft__label">CRAFTING TABLE</span>
+              <span class="craft__table-hint">3 x 3</span>
+            </div>
+            <div class="craft__grid" id="craftGrid" role="grid" aria-label="Recipe ingredients"></div>
+            <div class="craft__crafting-row">
+              <span class="craft__arrow" aria-hidden="true">➜</span>
+              <a class="craft__output" id="craftOutput" href="https://github.com/omruk5689-dev/B2-stealth-FC" target="_blank" rel="noopener noreferrer" aria-label="Open B2-Stealth FC on GitHub">
+                <span class="craft__output-icon" id="craftOutputIcon" aria-hidden="true">✈️</span>
+                <span class="craft__output-name" id="craftOutputName">B2-STEALTH FC</span>
+              </a>
+            </div>
+            <p class="craft__table-foot">HOVER A SLOT TO IDENTIFY THE PART</p>
+          </div>
+
+          <div class="craft__info">
+            <div class="craft__tabs" role="tablist" aria-label="Choose a recipe">
+              <button class="craft__tab is-active" type="button" role="tab" aria-selected="true" data-recipe="flight">FLIGHT</button>
+              <button class="craft__tab" type="button" role="tab" aria-selected="false" data-recipe="macro">MACRO</button>
+              <button class="craft__tab" type="button" role="tab" aria-selected="false" data-recipe="dev">DEV</button>
+              <button class="craft__tab" type="button" role="tab" aria-selected="false" data-recipe="nfc">NFC</button>
+            </div>
+            <div class="craft__result">
+              <p class="craft__result-kicker">RECIPE OUTPUT</p>
+              <h3 id="craftTitle">B2-STEALTH FC</h3>
+              <p id="craftDesc">A custom STM32F722 flight controller for RC fixed-wing planes, with an ICM-20689 IMU and DJI O4 support.</p>
+              <ul class="tags" id="craftTags" aria-label="Tech stack"><li>STM32F722</li><li>ICM-20689</li><li>DJI O4</li></ul>
+              <a class="btn btn--primary craft__open" id="craftLink" href="https://github.com/omruk5689-dev/B2-stealth-FC" target="_blank" rel="noopener noreferrer">OPEN REPO <span aria-hidden="true">-&gt;</span></a>
+            </div>
+            <p class="craft__hint">TIP: switch recipes to inspect the parts behind each build.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section contact" id="contact">
       <div class="shell">
         <div class="section-head reveal mc-section-head">
-          <p class="section-kicker">04 // SIGNAL</p>
+          <p class="section-kicker">05 // SIGNAL</p>
           <h2 class="section-title">&gt; CONTACT.SYS</h2>
           <p class="section-lede">Got a PCB idea, a collab, or a board that needs a home? Find me on GitHub — that's where I live.</p>
           <div class="mc-head-tools" aria-hidden="true"><span class="mc-mini-tool">💎</span><span class="mc-mini-tool">🧟</span><span class="mc-mini-tool">⛏️</span><span class="mc-mini-tool">🔥</span></div>
@@ -834,12 +938,108 @@
 
   <footer class="footer">
     <div class="shell footer__inner">
-      <p class="footer__copy">© 2026 OMER // BUILT WITH BLOCKS, SOLDER &amp; CAFFEINE</p>
+      <p class="footer__copy">© 2026 OMER // BUILT WITH BLOCKS, SOLDER &amp; CAFFEINE<br><span class="footer__seed">WORLD: OMERCRAFT // SEED: PCB-18-24 // COORDS: 18, 24, 10</span></p>
       <div class="footer__actions">
         <button class="footer__btn" type="button" id="rebootBtn">REBOOT</button>
         <a class="footer__btn" href="#home">TOP</a>
       </div>
     </div>
   </footer>
+
+  <div class="mc-hud" id="mcHud">
+    <div class="mc-hud__status" aria-hidden="true">
+      <div class="mc-hearts" id="mcHearts"></div>
+      <div class="mc-hunger" id="mcHunger"></div>
+    </div>
+    <div class="mc-hud__xp" aria-hidden="true">
+      <span class="mc-hud__level" id="mcXpLevel">18</span>
+      <div class="mc-xp"><span id="mcXpFill"></span></div>
+    </div>
+    <nav class="mc-hotbar" aria-label="Minecraft quick navigation">
+      <a class="mc-slot is-active" href="#home" data-section="home" title="Home" aria-label="Home">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect width="16" height="5" fill="#6db34a"/><rect y="5" width="16" height="11" fill="#79553a"/>
+          <rect x="2" y="2" width="3" height="2" fill="#7fd35a"/><rect x="10" y="1" width="2" height="2" fill="#5fa83a"/>
+          <rect x="3" y="8" width="2" height="2" fill="#5b4636"/><rect x="9" y="7" width="2" height="2" fill="#8a6444"/>
+          <rect x="6" y="11" width="2" height="2" fill="#5b4636"/><rect x="12" y="12" width="2" height="2" fill="#8a6444"/>
+        </svg>
+        <span class="mc-slot__num">1</span>
+      </a>
+      <a class="mc-slot" href="#projects" data-section="projects" title="Projects" aria-label="Projects">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="2" y="1" width="4" height="2" fill="#5fd3ff"/><rect x="6" y="2" width="3" height="2" fill="#5fd3ff"/>
+          <rect x="9" y="3" width="2" height="2" fill="#5fd3ff"/><rect x="10" y="5" width="2" height="2" fill="#5fd3ff"/>
+          <rect x="9" y="7" width="2" height="2" fill="#8b5a2b"/><rect x="8" y="9" width="2" height="2" fill="#8b5a2b"/>
+          <rect x="7" y="11" width="2" height="2" fill="#8b5a2b"/><rect x="6" y="13" width="2" height="2" fill="#8b5a2b"/>
+          <rect x="1" y="2" width="2" height="2" fill="#bff7ff"/>
+        </svg>
+        <span class="mc-slot__num">2</span>
+      </a>
+      <a class="mc-slot" href="#craft" data-section="craft" title="Crafting" aria-label="Crafting table">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect width="16" height="16" fill="#8a5a32"/><rect x="1" y="1" width="14" height="4" fill="#a87443"/>
+          <rect x="2" y="6" width="12" height="8" fill="#6b4426"/>
+          <rect x="3" y="7" width="4" height="3" fill="#a87443"/><rect x="9" y="7" width="4" height="3" fill="#a87443"/>
+          <rect x="3" y="11" width="4" height="2" fill="#a87443"/><rect x="9" y="11" width="4" height="2" fill="#a87443"/>
+        </svg>
+        <span class="mc-slot__num">3</span>
+      </a>
+      <a class="mc-slot" href="#about" data-section="about" title="About" aria-label="About">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="2" y="1" width="12" height="14" fill="#8a2f2f"/><rect x="4" y="3" width="8" height="10" fill="#f1e6c8"/>
+          <rect x="5" y="5" width="6" height="1" fill="#9a8b6a"/><rect x="5" y="7" width="6" height="1" fill="#9a8b6a"/>
+          <rect x="5" y="9" width="4" height="1" fill="#9a8b6a"/><rect x="2" y="1" width="2" height="14" fill="#6f2222"/>
+        </svg>
+        <span class="mc-slot__num">4</span>
+      </a>
+      <a class="mc-slot" href="#contact" data-section="contact" title="Contact" aria-label="Contact">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="4" y="1" width="8" height="2" fill="#c8c8c0"/><rect x="2" y="3" width="12" height="10" fill="#8b8b8b"/>
+          <rect x="4" y="5" width="8" height="6" fill="#1f2a36"/><rect x="7" y="4" width="2" height="8" fill="#d8d8d0"/>
+          <rect x="7" y="4" width="1" height="4" fill="#ff5b5b"/><rect x="4" y="13" width="8" height="2" fill="#c8c8c0"/>
+        </svg>
+        <span class="mc-slot__num">5</span>
+      </a>
+      <a class="mc-slot" href="https://github.com/omruk5689-dev" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub profile">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#i-star"></use></svg>
+        <span class="mc-slot__num">6</span>
+      </a>
+      <button class="mc-slot mc-slot--theme" id="hudTheme" type="button" title="Day / night" aria-label="Switch day or night">
+        <svg class="mc-icon-sun" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="6" y="2" width="4" height="12" fill="#f7c948"/><rect x="2" y="6" width="12" height="4" fill="#f7c948"/>
+          <rect x="5" y="5" width="6" height="6" fill="#ffe066"/><rect x="7" y="0" width="2" height="2" fill="#f7c948"/>
+          <rect x="7" y="14" width="2" height="2" fill="#f7c948"/><rect x="0" y="7" width="2" height="2" fill="#f7c948"/>
+          <rect x="14" y="7" width="2" height="2" fill="#f7c948"/>
+        </svg>
+        <svg class="mc-icon-moon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="4" y="1" width="7" height="2" fill="#dfe8ff"/><rect x="3" y="3" width="7" height="2" fill="#dfe8ff"/>
+          <rect x="2" y="5" width="6" height="6" fill="#dfe8ff"/><rect x="3" y="11" width="7" height="2" fill="#dfe8ff"/>
+          <rect x="4" y="13" width="7" height="2" fill="#dfe8ff"/><rect x="9" y="4" width="3" height="8" fill="#9fb3d9"/>
+        </svg>
+        <span class="mc-slot__num">7</span>
+      </button>
+      <button class="mc-slot mc-slot--sound" id="hudSound" type="button" title="Sound" aria-label="Toggle sound" aria-pressed="false">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="1" y="6" width="3" height="4" fill="#c8c8c0"/><rect x="4" y="4" width="2" height="8" fill="#d8d8d0"/>
+          <rect x="6" y="2" width="2" height="12" fill="#e8e8e0"/><rect x="10" y="5" width="2" height="6" fill="#55c233" class="mc-wave"/>
+          <rect x="12" y="3" width="2" height="10" fill="#8ef06a" class="mc-wave mc-wave--2"/>
+        </svg>
+        <span class="mc-slot__num">8</span>
+      </button>
+      <button class="mc-slot mc-slot--creeper" id="hudCreeper" type="button" title="Do not press" aria-label="Detonate creeper easter egg">
+        <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect width="16" height="16" fill="#58b848"/><rect x="2" y="2" width="12" height="12" fill="#4fa840"/>
+          <rect x="4" y="4" width="3" height="3" fill="#1f2d1a"/><rect x="9" y="4" width="3" height="3" fill="#1f2d1a"/>
+          <rect x="7" y="6" width="2" height="3" fill="#1f2d1a"/><rect x="5" y="9" width="2" height="2" fill="#1f2d1a"/>
+          <rect x="9" y="9" width="2" height="2" fill="#1f2d1a"/><rect x="6" y="11" width="4" height="2" fill="#1f2d1a"/>
+        </svg>
+        <span class="mc-slot__num">9</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="mc-toasts" id="mcToasts" aria-live="polite" aria-atomic="false"></div>
+  <div class="mc-burst-layer" id="mcBurstLayer" aria-hidden="true"></div>
+  <div class="mc-flash" id="mcFlash" aria-hidden="true"></div>
 </body>
 </html>

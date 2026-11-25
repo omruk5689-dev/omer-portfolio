@@ -190,7 +190,7 @@
 .contact__card:hover, .id-card:hover, .window:hover { transform: translateY(-4px); }
 
 .hero__title { animation: mc-title-pop 0.9s cubic-bezier(.2,.9,.2,1) both, mc-title-glow 3s ease-in-out infinite; }
-@keyframes mc-title-pop { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes mc-title-pop { from { transform: translateY(20px) scale(0.96); } to { transform: none; } }
 @keyframes mc-title-glow { 0%,100% { filter: drop-shadow(0 0 0 rgba(85,194,51,0)); } 50% { filter: drop-shadow(0 0 12px rgba(85,194,51,0.35)); } }
 
 .hero__eyebrow, .hero__role, .hero__lede, .hero__actions { animation: mc-fade-up 0.8s cubic-bezier(.2,.8,.2,1) both; }
@@ -198,16 +198,16 @@
 .hero__lede { animation-delay: .18s; }
 .hero__actions { animation-delay: .26s; }
 .mc-hero-row { animation: mc-fade-up 0.8s cubic-bezier(.2,.8,.2,1) .34s both; }
-@keyframes mc-fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes mc-fade-up { from { transform: translateY(16px); } to { transform: none; } }
 
 .hero__art { transition: transform 0.2s ease-out; animation: mc-art-in 1s cubic-bezier(.2,.8,.2,1) .15s both; }
-@keyframes mc-art-in { from { opacity: 0; transform: translateX(30px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes mc-art-in { from { transform: translateX(30px) scale(0.98); } to { transform: none; } }
 
 .btn, .filter, .chip-btn, .footer__btn, .project-card__link, .contact__action, .site-nav__link { transition: all 0.18s cubic-bezier(.2,.8,.2,1); }
 .btn:active, .chip-btn:active { transform: translateY(2px) scale(0.98); }
 
 .section-kicker { animation: mc-slide-in 0.6s ease both; }
-@keyframes mc-slide-in { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+@keyframes mc-slide-in { from { transform: translateX(-12px); } to { transform: none; } }
 
 .tags li { transition: transform 0.15s ease, background 0.15s ease; }
 .tags li:hover { transform: translateY(-2px); background: rgba(255,255,255,0.06); }

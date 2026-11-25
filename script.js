@@ -102,6 +102,7 @@
         boot.classList.remove("is-off");
         body.classList.remove("is-booting");
         setInert(false);
+        document.dispatchEvent(new CustomEvent("omer:entered"));
         const main = document.getElementById("main");
         if (main) main.focus({ preventScroll: true });
       }, reducedMotion ? 30 : 560)
@@ -245,9 +246,15 @@
       return ["opening github..."];
     },
     theme() {
-      const night = document.body.classList.toggle("theme-purple");
-      document.body.classList.toggle("theme-green-mc", !night);
-      return [`world set to ${night ? "amethyst night" : "overworld day"}`];
+      const toggle = document.getElementById("phosphorToggle");
+      if (toggle) {
+        toggle.click();
+      } else {
+        document.body.classList.toggle("theme-purple");
+        document.body.classList.toggle("theme-green-mc", !document.body.classList.contains("theme-purple"));
+      }
+      const night = document.body.classList.contains("theme-purple");
+      return [`world set to ${night ? "blocky night" : "overworld day"}`];
     },
     reboot() {
       if (typeof window.__omerBoot === "function") {
@@ -504,7 +511,7 @@
       phosphorToggle.setAttribute("aria-pressed", String(night));
       phosphorToggle.setAttribute("aria-label", night ? "Switch to day mode" : "Switch to night mode");
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", night ? "#14233a" : "#78b9ff");
+      if (meta) meta.setAttribute("content", night ? "#0b1026" : "#78b9ff");
     };
 
     phosphorToggle.addEventListener("click", () => {
