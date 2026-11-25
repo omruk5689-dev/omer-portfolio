@@ -52,6 +52,18 @@ python3 -m http.server 8123
 
 Then open `http://127.0.0.1:8123/`.
 
+## Files
+
+- `index.html` — main portfolio markup, boot screen, HUD, and sections
+- `404.html` — Minecraft-themed not-found page
+- `styles.css` — base layout, CRT/panel styling, responsive rules
+- `minecraft.css` — Minecraft theme animations and visual details
+- `enhance.css` — HUD, crafting table, achievements, and night-mode polish
+- `script.js` — boot, clock, reveal, filters, terminal, and theme behavior
+- `enhance.js` — sound engine, achievements, crafting recipes, and effects
+- `site.webmanifest`, `robots.txt`, `sitemap.xml`, `.nojekyll` — deploy/metadata files
+- `assets/` — fonts, favicon, and social preview image
+
 ## Stack
 
 - HTML, CSS, vanilla JS
